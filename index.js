@@ -10,18 +10,18 @@ function start(dificulty = 1){
         i = 0
     }
     dificulty = 1;
-for (let y = 0; y < 100; y++) {
-    for (let x = 0; x < 100; x++) {
+    for (let y = 0; y < 100; y++) {
+        for (let x = 0; x < 100; x++) {
 
-        if (
-            (y === 0 || y === 99) && x % dificulty === 0 ||
-            (x === 0 || x === 99) && y % dificulty === 0
-        ) {
-            enemies.push({ x, y });
+            if (
+                (y === 0 || y === 99) && x % dificulty === 0 ||
+                (x === 0 || x === 99) && y % dificulty === 0
+            ) {
+                enemies.push({ x, y });
+            }
+            st = true;
         }
-        st = true;
-    }
-}}
+    }}
 let mov2 = 1
 let mov = 1;
 let color = []
@@ -62,8 +62,8 @@ function move() {
         if (el) el.style.backgroundColor = "white";
     }
     color = [];
-
-
+    if (i % 100 === 0) start()
+//..../..
     for (let j of enemies) {
 
         let old = {...j};
@@ -89,8 +89,8 @@ function move() {
         }
 
         // clamp
-        j.x = Math.max(0, Math.min(100, j.x));
-        j.y = Math.max(0, Math.min(100, j.y));
+        j.x = Math.max(0, Math.min(99, j.x));
+        j.y = Math.max(0, Math.min(99, j.y));
 
         let newDist
 
@@ -108,8 +108,8 @@ function move() {
         // телепорт рухається іноді
 
         // рух гравця
-        player.x = Math.max(0, Math.min(100, player.x));
-        player.y = Math.max(0, Math.min(100, player.y));
+        player.x = Math.max(0, Math.min(99, player.x));
+        player.y = Math.max(0, Math.min(99, player.y));
 
         // телепорт
 
@@ -181,25 +181,25 @@ document.getElementById("q").addEventListener("click", function () {
 
 
 document.addEventListener("keydown", (event) => {
-    if (event.code === "KeyW") {
-        player.y -= mov2;
-        move()
-    }else if (event.code === "KeyS") {
-        player.y += mov2;
-        move()
-    }else if (event.code === "KeyA") {
-        player.x -= mov2;
-        move()
-    }else if (event.code === "KeyD") {
-        player.x += mov2;
-        move()
-    }else if (event.code === "KeyE") {
-        teleport ={ ...player};
-        move()
-    }else if (event.code === "KeyQ") {
-        player = {...teleport};
-        move()
-    }
+        if (event.code === "KeyW") {
+            player.y -= mov2;
+            move()
+        }else if (event.code === "KeyS") {
+            player.y += mov2;
+            move()
+        }else if (event.code === "KeyA") {
+            player.x -= mov2;
+            move()
+        }else if (event.code === "KeyD") {
+            player.x += mov2;
+            move()
+        }else if (event.code === "KeyE") {
+            teleport ={ ...player};
+            move()
+        }else if (event.code === "KeyQ") {
+            player = {...teleport};
+            move()
+        }
     }
 )
 document.getElementById("start").addEventListener("click", function () {
@@ -229,12 +229,11 @@ document.getElementById("c").addEventListener("click",function () {
     move()
 })
 document.getElementById("rtp").addEventListener("click", function () {
-    if (i >= 30){
+    if (i >= 60){
         let num = Math.floor(Math.random() * 100) + 1;
         let num2 = Math.floor(Math.random() * 100) +1;
         player = {x: num, y: num2};
-        teleport = {x: num, y: num2};
-        i -= 30
+        i -= 60
         move()
     }
 })
