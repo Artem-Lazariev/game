@@ -1,8 +1,15 @@
 let enemies = [
 
 ];
+
 let st = false;
+let i = 0;
 function start(dificulty = 1){
+    if (!st) {
+        enemies = []
+        i = 0
+    }
+    dificulty = 1;
 for (let y = 0; y < 100; y++) {
     for (let x = 0; x < 100; x++) {
 
@@ -45,11 +52,11 @@ function distance(a, b) {
     return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 }
 
-let i = 0;
+
 
 function move() {
 // очистка
-    document.getElementById("text").innerHTML = `step: ${i}`;
+    document.getElementById("text").innerHTML = `money: ${i}`;
     for (let j of color) {
         let el = document.getElementById(j);
         if (el) el.style.backgroundColor = "white";
@@ -60,8 +67,13 @@ function move() {
     for (let j of enemies) {
 
         let old = {...j};
-        let oldDist = distance(player, j);
-
+        let r3 = Math.random() < 0.75;
+        let oldDist
+        if (r3) {
+            oldDist = distance(player, j);
+        }else {
+            oldDist = distance(teleport, j)
+        }
         let r1 = Math.random() < 0.5;
         let r2 = Math.random() < 0.5;
 
@@ -80,8 +92,13 @@ function move() {
         j.x = Math.max(0, Math.min(100, j.x));
         j.y = Math.max(0, Math.min(100, j.y));
 
-        let newDist = distance(player, j);
+        let newDist
 
+        if (r3) {
+            newDist = distance(player, j);
+        }else {
+            newDist = distance(teleport, j)
+        }
         if (newDist > oldDist) {
             Object.assign(j, old);
         } else {
@@ -100,7 +117,10 @@ function move() {
         // game over
         if (distance(player, j) === 0) {
             console.log("GAME OVER:", i);
-            clearInterval(interval);
+            alert("GAME OVER: ")
+
+            st = false;
+
             return;
         }
     }
@@ -137,11 +157,12 @@ document.getElementById("w").addEventListener("click", function () {
     move()
 });
 document.getElementById("s").addEventListener("click", function () {
-    player.x -= mov2;
+
+    player.y += mov2;
     move()
 })
 document.getElementById("a").addEventListener("click", function () {
-    player.y += mov2;
+    player.x -= mov2;
     move()
 })
 document.getElementById("d").addEventListener("click", function () {
@@ -157,6 +178,8 @@ document.getElementById("q").addEventListener("click", function () {
     player = {...teleport};
     move()
 })
+
+
 document.addEventListener("keydown", (event) => {
     if (event.code === "KeyW") {
         player.y -= mov2;
@@ -180,6 +203,38 @@ document.addEventListener("keydown", (event) => {
     }
 )
 document.getElementById("start").addEventListener("click", function () {
-    start(document.getElementById("input").value);
+    start(1);
     move()
+})
+document.getElementById("c").addEventListener("click",function () {
+
+    if (i >= 30) {
+
+
+        let player2 = {...player};
+        let p1 = {x: player2.x - 1, y: player2.y}
+        let p2 = {x: player2.x + 1, y: player2.y}
+        let p3 = {x: player2.x, y: player2.y - 1}
+        let p4 = {x: player2.x, y: player2.y + 1}
+        let p5 = {x: player2.x + 1, y: player2.y + 1}
+        let p6 = {x: player2.x - 1, y: player2.y - 1}
+        let p7 = {x: player2.x + 1, y: player2.y - 1}
+        let p8 = {x: player2.x - 1, y: player2.y + 1}
+        let positions = [p1, p2, p3, p4, p5, p6, p7, p8];
+        enemies = enemies.filter(enemy => {
+            return !positions.some(p => p.x === enemy.x && p.y === enemy.y);
+        });
+        i -= 30
+    }
+    move()
+})
+document.getElementById("rtp").addEventListener("click", function () {
+    if (i >= 30){
+        let num = Math.floor(Math.random() * 100) + 1;
+        let num2 = Math.floor(Math.random() * 100) +1;
+        player = {x: num, y: num2};
+        teleport = {x: num, y: num2};
+        i -= 30
+        move()
+    }
 })
