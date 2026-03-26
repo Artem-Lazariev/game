@@ -48,3 +48,32 @@ body{
     display: flex;
     flex-direction: column;
 }
+.mods{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+.mods p {
+    margin: 0;
+    padding: 0;
+}
+.mods a {
+    margin: 0;
+    text-decoration: none;
+    color: black;
+    background-color: rgb(182, 178, 178);
+    border-radius: 5px;
+    padding: 5px 5px 5px 5px;
+    border: 1px solid black;
+    width: 100px;
+    text-align: center;
+    font-size: 15px;
+}
+.mods .current {
+    margin: 0;
+    text-decoration: none;
+    color: rgb(0, 43, 255);
+}
