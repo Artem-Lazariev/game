@@ -1,33 +1,30 @@
 let enemies = [
 
 ]
-let spike
-let st = false;
+let color = []
+let spike = {x: -100, y: -100}
+let st = true;
 let sp = false
 let i = 0;
-function start(difficult = 1){
-    if (!st) {
-        enemies = []
-        i = 0
-    }
-    difficult = 1;
-    for (let y = 0; y < 100; y++) {
-        for (let x = 0; x < 100; x++) {
 
-            if (
-                (y === 0 || y === 99) && x % difficult === 0 ||
-                (x === 0 || x === 99) && y % difficult === 0
-            ) {
-                enemies.push({ x, y });
-            }
-            st = true;
-        }
-    }}
 let mov2 = 1
 let mov = 1;
-let color = []
+
 let table = document.getElementById("grid");
 let teleport = {x: 50, y: 50}
+let score = 0;
+let player = { x: 50, y: 50 };
+
+for (let i = 1; i < 35; i++) {
+    for (let j = 1; j < 35; j++) {
+
+        enemies.push({x: i, y: j});
+        console.table({x: i, y: j})
+
+    }
+}
+
+
 for (let y = 0; y < 100; y++) {
     let row = document.createElement("tr");
 
@@ -42,8 +39,6 @@ for (let y = 0; y < 100; y++) {
 
     table.appendChild(row);
 }
-let score = 0;
-let player = { x: 50, y: 50 };
 
 
 
@@ -57,23 +52,28 @@ function distance(a, b) {
 
 function move() {
 // очистка
+    if (spike.x === 0) {
+        if (spike.y === 0) {
+
+        alert("win")
+        st = false;
+    }}
     document.getElementById("text").innerHTML = `money: ${i}`;
     for (let j of color) {
         let el = document.getElementById(j);
         if (el) el.style.backgroundColor = "white";
     }
     color = [];
-    if (i % 100 === 0) start()
 //..../..
     for (let j of enemies) {
 
         let old = {...j};
-        let r3 = Math.random() < 0.75;
+        let r3 = Math.random() < 0.50;
         let oldDist
         if (r3) {
-            oldDist = distance(player, j);
+            oldDist = distance({x:0,y:0}, j);
         }else {
-            oldDist = distance(teleport, j)
+            oldDist = distance(player, j)
         }
         let r1 = Math.random() < 0.5;
         let r2 = Math.random() < 0.5;
@@ -96,9 +96,9 @@ function move() {
         let newDist
 
         if (r3) {
-            newDist = distance(player, j);
+            newDist = distance({x:0,y:0}, j);
         }else {
-            newDist = distance(teleport, j)
+            newDist = distance(player, j)
         }
         if (newDist > oldDist) {
             Object.assign(j, old);
@@ -124,6 +124,7 @@ function move() {
 
             return;
         }
+
 
     }
     console.log(enemies, player, score);
@@ -160,10 +161,11 @@ function move() {
         if (pcell2) pcell2.style.backgroundColor = "yellow";
         color.push(pid2);
     }
-    if (enemies.length === 0) {
-        alert("YOU WIN")
-        st = false;
-    }
+     let pids = toCellId(0,0);
+     let pcell2 = document.getElementById(pids);
+     if (pcell2) pcell2.style.backgroundColor = "darkred";
+
+
 }
 move()
 document.getElementById("w").addEventListener("click", function () {
@@ -217,7 +219,7 @@ document.addEventListener("keydown", (event) => {
     }
 )
 document.getElementById("start").addEventListener("click", function () {
-    start(1);
+
     move()
 })
 document.getElementById("c").addEventListener("click",function () {
@@ -274,6 +276,7 @@ document.getElementById("spike").addEventListener("click", function () {
         spike = {x: player.x, y: player.y};
         i -= 30;
         sp = true;
+        console.log(spike)
         document.getElementById("spike").innerHTML = "activate spike"
     }else{
         if (sp) {
@@ -297,3 +300,4 @@ document.getElementById("laser").addEventListener("click", function () {
     }
     move();
 })
+

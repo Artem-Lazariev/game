@@ -88,6 +88,7 @@ function move() {
 
             return;
         }
+
     }
     console.log(enemies, player, score);
     if (st) {
@@ -122,6 +123,11 @@ function move() {
 
         if (pcell2) pcell2.style.backgroundColor = "yellow";
         color.push(pid2);
+
+        if (enemies.length === 0) {
+            alert("YOU WIN")
+            st = false;
+        }
     }
 }
 move()
@@ -229,7 +235,7 @@ function spikeExplosion(center) {
 
 document.getElementById("spike").addEventListener("click", function () {
 
-    if (i >= 30) {
+    if (i >= 30 && !sp) {
         spike = {x: player.x, y: player.y};
         i -= 30;
         sp = true;
@@ -239,8 +245,23 @@ document.getElementById("spike").addEventListener("click", function () {
             document.getElementById("spike").innerHTML = "spike - 30"
             spikeExplosion(spike);
             spike = null;
+            sp = false;
+            i -= 15
         }
     }
 
+
     move();
 });
+
+document.getElementById("laser").addEventListener("click", function () {
+    if (i >= 30) {
+
+        enemies = enemies.filter(enemy => {
+            return enemy.x !== player.x && enemy.y !== player.y;
+        });
+        i -= 30
+    }
+
+    move();
+})
