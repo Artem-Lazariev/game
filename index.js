@@ -1,21 +1,22 @@
 let enemies = [
 
-];
-
+]
+let spike
 let st = false;
+let sp = false
 let i = 0;
-function start(dificulty = 1){
+function start(difficult = 1){
     if (!st) {
         enemies = []
         i = 0
     }
-    dificulty = 1;
+    difficult = 1;
     for (let y = 0; y < 100; y++) {
         for (let x = 0; x < 100; x++) {
 
             if (
-                (y === 0 || y === 99) && x % dificulty === 0 ||
-                (x === 0 || x === 99) && y % dificulty === 0
+                (y === 0 || y === 99) && x % difficult === 0 ||
+                (x === 0 || x === 99) && y % difficult === 0
             ) {
                 enemies.push({ x, y });
             }
@@ -150,6 +151,14 @@ function move() {
     let pCell = document.getElementById(pId);
     if (pCell) pCell.style.backgroundColor = "green";
     color.push(pId);
+    if (spike) {
+
+        let pid2 = toCellId(spike.x, spike.y);
+        let pcell2 = document.getElementById(pid2);
+
+        if (pcell2) pcell2.style.backgroundColor = "yellow";
+        color.push(pid2);
+    }
 }
 move()
 document.getElementById("w").addEventListener("click", function () {
@@ -237,3 +246,37 @@ document.getElementById("rtp").addEventListener("click", function () {
         move()
     }
 })
+function spikeExplosion(center) {
+    let positions = [];
+
+    for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+            positions.push({
+                x: center.x + dx,
+                y: center.y + dy
+            });
+        }
+    }
+
+    enemies = enemies.filter(enemy => {
+        return !positions.some(p => p.x === enemy.x && p.y === enemy.y);
+    });
+}
+
+document.getElementById("spike").addEventListener("click", function () {
+
+    if (i >= 30) {
+        spike = {x: player.x, y: player.y};
+        i -= 30;
+        sp = true;
+        document.getElementById("spike").innerHTML = "activate spike"
+    }else{
+        if (sp) {
+            document.getElementById("spike").innerHTML = "spike - 30"
+            spikeExplosion(spike);
+            spike = null;
+        }
+    }
+
+    move();
+});

@@ -5,6 +5,9 @@ let w =document.getElementById("w")
 let e =document.getElementById("e")
 let s =document.getElementById("s")
 let d =document.getElementById("d")
+let spike =document.getElementById("spike")
+let c =document.getElementById("c")
+let rtp =document.getElementById("rtp")
 q.addEventListener("mouseenter",function(){
     q.style.width = "60px"
     q.style.height = "60px"
@@ -88,4 +91,35 @@ s.addEventListener("mouseleave",function(){
     s.innerHTML = "s"
     a.style.display = "flex"
     d.style.display = "flex"
+})
+spike.addEventListener("mouseenter",function(){
+    spike.style.width = "60px"
+    spike.style.height = "150px"
+    spike.innerHTML = "spike - its bomb that explodes 3x3 after second click"
+})
+spike.addEventListener("mouseleave",function(){
+    spike.style.width = "100%"
+    spike.style.height = "100%"
+    spike.innerHTML = "spike - 30"
+})
+
+c.addEventListener("mouseenter",function(){
+    c.style.width = "60px"
+    c.style.height = "150px"
+    c.innerHTML = "clear3x3 - your player explodes 3x3 but player not die"
+})
+c.addEventListener("mouseleave",function(){
+    c.style.width = "100%"
+    c.style.height = "100%"
+    c.innerHTML = "clear3x3 - 30"
+})
+rtp.addEventListener("mouseenter",function(){
+    rtp.style.width = "60px"
+    rtp.style.height = "150px"
+    rtp.innerHTML = "rtp - random teleport"
+})
+rtp.addEventListener("mouseleave",function(){
+    rtp.style.width = "100%"
+    rtp.style.height = "100%"
+    rtp.innerHTML = "rtp - 60"
 })
