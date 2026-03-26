@@ -92,16 +92,7 @@ s.addEventListener("mouseleave",function(){
     a.style.display = "flex"
     d.style.display = "flex"
 })
-spike.addEventListener("mouseenter",function(){
-    spike.style.width = "60px"
-    spike.style.height = "150px"
-    spike.innerHTML = "spike - its bomb that explodes 3x3 after second click"
-})
-spike.addEventListener("mouseleave",function(){
-    spike.style.width = "100%"
-    spike.style.height = "100%"
-    spike.innerHTML = "spike - 30"
-})
+
 
 c.addEventListener("mouseenter",function(){
     c.style.width = "60px"
