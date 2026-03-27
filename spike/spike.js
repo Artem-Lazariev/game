@@ -56,9 +56,6 @@ function move() {
         const randomNumber = Math.floor(Math.random() * 100);
         const randomNumber2 = Math.floor(Math.random() * 100);
         targ = {x: randomNumber, y: randomNumber2};
-        spike = {x: -100, y: -100};
-        sp = false;
-        st = false;
     }
     document.getElementById("text").innerHTML = `money: ${i}`;
     for (let j of color) {
