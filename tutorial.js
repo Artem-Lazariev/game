@@ -126,3 +126,6 @@ laser.addEventListener("mouseleave",function(){
     laser.style.width = "100%"
     laser.innerHTML = "laser - 30"
 })
+document.getElementById("tutorial").addEventListener("click",function(){
+    window.location.href = "./tutorial/tutorial.html"
+})

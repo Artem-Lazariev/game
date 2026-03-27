@@ -72,6 +72,18 @@ body{
     text-align: center;
     font-size: 15px;
 }
+.mode {
+    margin: 0;
+    text-decoration: none;
+    color: black;
+    background-color: rgb(182, 178, 178);
+    border-radius: 5px;
+    padding: 5px 5px 5px 5px;
+    border: 1px solid black;
+    width: 100px;
+    text-align: center;
+    font-size: 15px;
+}
 .mods .current {
     margin: 0;
     text-decoration: none;
