@@ -52,14 +52,7 @@ function distance(a, b) {
 
 function move() {
 // очистка
-    if (spike.x === targ.x && spike.y === targ.y) {
-        const randomNumber = Math.floor(Math.random() * 100);
-        const randomNumber2 = Math.floor(Math.random() * 100);
-        targ = {x: randomNumber, y: randomNumber2};
-        spike = {x: -100, y: -100};
-        sp = false;
-        st = false;
-    }
+
     document.getElementById("text").innerHTML = `money: ${i}`;
     for (let j of color) {
         let el = document.getElementById(j);
@@ -126,11 +119,6 @@ function move() {
         if (pcell2) pcell2.style.backgroundColor = "yellow";
         color.push(pid2);
     }
-     let pids = toCellId(targ.x,targ.y
-     );
-     let pcell2 = document.getElementById(pids);
-     if (pcell2) pcell2.style.backgroundColor = "darkred";
-
 
 }
 move()

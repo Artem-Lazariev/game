@@ -14,25 +14,15 @@ let table = document.getElementById("grid");
 let teleport = {x: 50, y: 50}
 let score = 0;
 let player = { x: 50, y: 50 };
-function start(difficult = 1){
-    if (!st) {
-        enemies = []
-        i = 0
+
+for (let i = 1; i < 35; i++) {
+    for (let j = 1; j < 35; j++) {
+
+        enemies.push({x: i, y: j});
+        console.table({x: i, y: j})
+
     }
-    difficult = 1;
-    for (let y = 0; y < 100; y++) {
-        for (let x = 0; x < 100; x++) {
-
-            if (
-                (y === 0 || y === 99) && x % difficult === 0 ||
-                (x === 0 || x === 99) && y % difficult === 0
-            ) {
-                enemies.push({ x, y });
-            }
-            st = true;
-        }
-    }}
-
+}
 
 for (let y = 0; y < 100; y++) {
     let row = document.createElement("tr");
@@ -233,10 +223,10 @@ document.addEventListener("keydown", (event) => {
     }
 )
 document.getElementById("start").addEventListener("click", function () {
-    start()
+
     move()
 })
-start()
+
 move()
 document.getElementById("c").addEventListener("click",function () {
 
