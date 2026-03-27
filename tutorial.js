@@ -8,6 +8,7 @@ let d =document.getElementById("d")
 let spike =document.getElementById("spike")
 let c =document.getElementById("c")
 let rtp =document.getElementById("rtp")
+let laser = document.getElementById("laser")
 q.addEventListener("mouseenter",function(){
     q.style.width = "60px"
     q.style.height = "60px"
@@ -114,4 +115,14 @@ rtp.addEventListener("mouseleave",function(){
     rtp.style.height = "100%"
     rtp.innerHTML = "rtp - 60"
 })
-//...
+
+laser.addEventListener("mouseenter",function(){
+    laser.style.height = "150px"
+    laser.style.width = "60px"
+    laser.innerHTML = "laser - kill enemies on x or y axis"
+})
+laser.addEventListener("mouseleave",function(){
+    laser.style.height = "100%"
+    laser.style.width = "100%"
+    laser.innerHTML = "laser - 30"
+})

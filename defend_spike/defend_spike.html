@@ -1,19 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href=".././index.css">
 </head>
 <body>
 <div class="mods">
     <p>mods</p>
-    <a href="index.html" class="current">main</a>
-    <a href="./random/random.html">random</a>
-    <a href="random_speed/random_speed.html">random_speed</a>
-    <a href="spike/spike.html">spike</a>
-    <a href="defend_spike/defend_spike.html">defend spike</a>
-    <a href="/tutorial/tutorial.html">tutorial</a>
+    <a href="defend_spike.html">main</a>
+    <a href=".././random/random.html">random</a>
+    <a href=".././random_speed/random_speed.html">random_speed</a>
+    <a href=".././spike/spike.html" >spike</a>
+    <a class="current" href="defend_spike.html">defend spike</a>
+    <a href="../tutorial/tutorial.html">tutorial</a>
 </div>
 <div class="info">
     <button id="start"   >Start</button>
@@ -33,13 +34,13 @@
     <div class="buttons colum">
 
         <button id="rtp" >rtp - 60</button>
-        <button id="c" >clear3x3 - 30</button>
-        <button id="spike" >spike - 30</button>
+        <button id="c" class="none">clear3x3 - 30</button>
+        <button id="spike" class="none" >spike - 30</button>
         <button id="laser" >laser - 30</button>
     </div>
 </div>
 <table id="grid"></table>
-<script type="module" src="index.js"></script>
-<script type="module" src="tutorial.js"></script>
+<script type="module" src="defend_spike.js"></script>
+<script type="module" src=".././tutorial.js"></script>
 </body>
 </html>

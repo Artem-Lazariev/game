@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +9,27 @@
 <body>
 <div class="mods">
     <p>mods</p>
-    <a href="../index.html">main</a>
-    <a href="random.html" class="current">random</a>
+    <a href="../index.html" >main</a>
+    <a href=".././random/random.html">random</a>
     <a href="../random_speed/random_speed.html">random_speed</a>
-    <a href="../spike/spike.html">spike</a>
+    <a href="../spike/spike.html" >spike</a>
     <a href="../defend_spike/defend_spike.html">defend spike</a>
-    <a href="../tutorial/tutorial.html">tutorial</a>
+    <a href="tutorial.html" class="current">tutorial</a>
+</div>
+<div class="info">
+<h1>tutorial move and abilities</h1>
+    <ul>
+        <li>w - move up</li>
+        <li>a - move down</li>
+        <li>d - move left</li>
+        <li>e - move right</li>
+        <li>q - use teleport</li>
+        <li>e - move teleport</li>
+        <li>rtp - random teleport</li>
+        <li>clear3x3 - your player explodes 3x3 but player not die</li>
+        <li>spike - plant spike/bomb and if you activate it  spike/bomb explodes 3x3</li>
+        <li>laser - kill  enemies on x or y axis</li>
+    </ul>
 </div>
 <div class="info">
     <button id="start"  >Start</button>
@@ -39,7 +55,7 @@
     </div>
 </div>
 <table id="grid"></table>
-<script type="module" src="random.js"></script>
-<script type="module" src="../tutorial.js"></script>
+<script type="module" src="tutorial_mode.js"></script>
+<script type="module" src=".././tutorial.js"></script>
 </body>
 </html>

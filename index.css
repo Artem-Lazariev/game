@@ -77,3 +77,6 @@ body{
     text-decoration: none;
     color: rgb(0, 43, 255);
 }
+.none{
+    display: none;
+}
