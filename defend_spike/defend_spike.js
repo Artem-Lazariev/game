@@ -15,11 +15,11 @@ let teleport = {x: 50, y: 50}
 let score = 0;
 let player = { x: 50, y: 50 };
 
-for (let i = 1; i < 35; i++) {
-    for (let j = 1; j < 35; j++) {
+for (let i = 1; i < 3; i++) {
+    for (let j = 1; j < 3; j++) {
 
         enemies.push({x: i, y: j});
-        console.table({x: i, y: j})
+
 
     }
 }
@@ -66,6 +66,11 @@ function move() {
     }
     color = [];
 //..../..
+
+    if (enemies.length === 0) {
+        alert("YOU WIN")
+        st = false;
+    }
     for (let j of enemies) {
 
         let old = {...j};
@@ -127,10 +132,8 @@ function move() {
             return;
         }
 
-        if (enemies.length === 0) {
-            alert("YOU WIN")
-            st = false;
-        }
+
+
         if (j.x === player.x && j.y === player.y) {
             enemies.splice(enemies.indexOf(j),1)
         }
