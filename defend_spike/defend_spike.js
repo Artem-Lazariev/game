@@ -127,9 +127,15 @@ function move() {
             return;
         }
 
-
+        if (enemies.length === 0) {
+            alert("YOU WIN")
+            st = false;
+        }
+        if (j.x === player.x && j.y === player.y) {
+            enemies.splice(enemies.indexOf(j),1)
+        }
     }
-    console.log(enemies, player, score);
+    console.log(enemies.length )
     if (st) {
         i++;
     }
@@ -144,9 +150,7 @@ function move() {
         color.push(id);
     }
 
-    enemies.filter(function (enemy){
-        return !enemy === player;
-    })
+
 
 
     let pid = toCellId(teleport.x, teleport.y);
