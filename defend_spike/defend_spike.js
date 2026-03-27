@@ -15,8 +15,8 @@ let teleport = {x: 50, y: 50}
 let score = 0;
 let player = { x: 50, y: 50 };
 
-for (let i = 1; i < 3; i++) {
-    for (let j = 1; j < 3; j++) {
+for (let i = 1; i < 7; i++) {
+    for (let j = 1; j < 7; j++) {
 
         enemies.push({x: i, y: j});
 
