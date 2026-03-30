@@ -1,7 +1,7 @@
 let enemies = [
     {x: 25, y: 25},
     {x: 25, y: 50},
-    {z: 25, y: 75},
+    {x: 25, y: 75},
     {x: 50, y: 25},
     {x: 75, y:25},
     {x:75, y:50},
@@ -172,6 +172,9 @@ document.addEventListener("keydown", (event) => {
         }
     }
 )
+function toCellId(x, y) {
+    return `{x:${Math.round(x)},y:${Math.round(y)}}`;
+}
 document.getElementById("start").addEventListener("click", function () {
 
     move()
@@ -195,6 +198,28 @@ document.getElementById("c").addEventListener("click",function () {
             return !positions.some(p => p.x === enemy.x && p.y === enemy.y);
         });
         i -= 30
+        document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "orange";
+        document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "orange";
+        document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "orange";
+        document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "orange";
+        document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "orange";
+        document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "orange";
+        document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "orange";
+        document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "orange";
+        setTimeout(() => {
+
+            document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "white";
+
+            }
+        ,500)
+
     }
     move()
 })
@@ -208,20 +233,41 @@ document.getElementById("rtp").addEventListener("click", function () {
     }
 })
 function spikeExplosion(center) {
-    let positions = [];
-
-    for (let dx = -2; dx <= 2; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-            positions.push({
-                x: center.x + dx,
-                y: center.y + dy
-            });
-        }
-    }
-
+    let player2 = {...player};
+    let p1 = {x: player2.x - 1, y: player2.y}
+    let p2 = {x: player2.x + 1, y: player2.y}
+    let p3 = {x: player2.x, y: player2.y - 1}
+    let p4 = {x: player2.x, y: player2.y + 1}
+    let p5 = {x: player2.x + 1, y: player2.y + 1}
+    let p6 = {x: player2.x - 1, y: player2.y - 1}
+    let p7 = {x: player2.x + 1, y: player2.y - 1}
+    let p8 = {x: player2.x - 1, y: player2.y + 1}
+    let positions = [p1, p2, p3, p4, p5, p6, p7, p8];
     enemies = enemies.filter(enemy => {
         return !positions.some(p => p.x === enemy.x && p.y === enemy.y);
     });
+    document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "orange";
+    setTimeout(() => {
+
+            document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "white";
+
+        }
+        ,500)
+
 }
 
 document.getElementById("spike").addEventListener("click", function () {
@@ -236,9 +282,9 @@ document.getElementById("spike").addEventListener("click", function () {
         if (sp) {
             document.getElementById("spike").innerHTML = "spike - 30"
             spikeExplosion(spike);
-            spike = null;
+            spike = {x: -100, y: -100};
             sp = false;
-            i -= 15
+            i -= 15;
         }
     }
 
@@ -250,8 +296,28 @@ document.getElementById("laser").addEventListener("click", function () {
         enemies = enemies.filter(enemy => {
             return enemy.x !== player.x && enemy.y !== player.y;
         });
+        const orange = [];
+        for (let i = 0 ;i < 100; i++) {
+            if (i === player.x || i === player.y) continue;
+            let pidd = toCellId(player.x, i);
+            let pcelll = document.getElementById(pidd);
+            if (pcelll) pcelll.style.backgroundColor = "orange";
+            orange.push(pidd);
+            pidd = toCellId(i, player.y);
+            pcelll = document.getElementById(pidd);
+            if (pcelll) pcelll.style.backgroundColor = "orange";
+            orange.push(pidd);
+        }
+        setTimeout(() => {
+            for (let i of orange) {
+
+                let cell = document.getElementById(i);
+                if (cell) cell.style.backgroundColor = "white";
+            }
+        }, 500);
         i -= 30
     }
+
     move();
 })
 
