@@ -290,7 +290,7 @@ document.getElementById("rtp").addEventListener("click", function () {
     }
 })
 function spikeExplosion(center) {
-    let player2 = {...spike}; //or spike
+    let player2 = {...center};
     let p1 = {x: player2.x - 1, y: player2.y}
     let p2 = {x: player2.x + 1, y: player2.y}
     let p3 = {x: player2.x, y: player2.y - 1}
@@ -326,7 +326,6 @@ function spikeExplosion(center) {
         ,500)
 
 }
-
 document.getElementById("spike").addEventListener("click", function () {
 
     if (i >= 30 && !sp) {
