@@ -213,7 +213,7 @@ document.getElementById("c").addEventListener("click",function () {
     if (i >= 30) {
 
 
-        let player2 = {...spike};
+        let player2 = {...player};
         let p1 = {x: player2.x - 1, y: player2.y}
         let p2 = {x: player2.x + 1, y: player2.y}
         let p3 = {x: player2.x, y: player2.y - 1}
@@ -262,7 +262,7 @@ document.getElementById("rtp").addEventListener("click", function () {
     }
 })
 function spikeExplosion(center) {
-    let player2 = {...player};
+    let player2 = {...center};
     let p1 = {x: player2.x - 1, y: player2.y}
     let p2 = {x: player2.x + 1, y: player2.y}
     let p3 = {x: player2.x, y: player2.y - 1}
