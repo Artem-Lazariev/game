@@ -1,6 +1,6 @@
 let enemies = [
 
-]
+]//hi
 let spike
 let st = false;
 let sp = false
