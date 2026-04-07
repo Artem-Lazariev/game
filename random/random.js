@@ -217,20 +217,41 @@ document.getElementById("rtp").addEventListener("click", function () {
     }
 })
 function spikeExplosion(center) {
-    let positions = [];
-
-    for (let dx = -1; dx <= 1; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-            positions.push({
-                x: center.x + dx,
-                y: center.y + dy
-            });
-        }
-    }
-
+    let player2 = {...center};
+    let p1 = {x: player2.x - 1, y: player2.y}
+    let p2 = {x: player2.x + 1, y: player2.y}
+    let p3 = {x: player2.x, y: player2.y - 1}
+    let p4 = {x: player2.x, y: player2.y + 1}
+    let p5 = {x: player2.x + 1, y: player2.y + 1}
+    let p6 = {x: player2.x - 1, y: player2.y - 1}
+    let p7 = {x: player2.x + 1, y: player2.y - 1}
+    let p8 = {x: player2.x - 1, y: player2.y + 1}
+    let positions = [p1, p2, p3, p4, p5, p6, p7, p8];
     enemies = enemies.filter(enemy => {
         return !positions.some(p => p.x === enemy.x && p.y === enemy.y);
     });
+    document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "orange";
+    document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "orange";
+    setTimeout(() => {
+
+            document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "white";
+            document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "white";
+
+        }
+        ,500)
+
 }
 
 document.getElementById("spike").addEventListener("click", function () {
