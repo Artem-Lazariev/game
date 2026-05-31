@@ -208,50 +208,46 @@ document.getElementById("start").addEventListener("click", function () {
 
     move()
 })
-document.getElementById("c").addEventListener("click",function () {
-
+document.getElementById("c").addEventListener("click", function () {
     if (i >= 30) {
+        let p = {...player};
 
+        // Масив точок кругового вибуху навколо гравця
+        let positions = [
+            {x: p.x - 1, y: p.y},     {x: p.x + 1, y: p.y},
+            {x: p.x,     y: p.y - 1}, {x: p.x,     y: p.y + 1},
+            {x: p.x + 1, y: p.y + 1}, {x: p.x - 1, y: p.y - 1},
+            {x: p.x + 1, y: p.y - 1}, {x: p.x - 1, y: p.y + 1}
+        ];
 
-        let player2 = {...player};
-        let p1 = {x: player2.x - 1, y: player2.y}
-        let p2 = {x: player2.x + 1, y: player2.y}
-        let p3 = {x: player2.x, y: player2.y - 1}
-        let p4 = {x: player2.x, y: player2.y + 1}
-        let p5 = {x: player2.x + 1, y: player2.y + 1}
-        let p6 = {x: player2.x - 1, y: player2.y - 1}
-        let p7 = {x: player2.x + 1, y: player2.y - 1}
-        let p8 = {x: player2.x - 1, y: player2.y + 1}
-        let positions = [p1, p2, p3, p4, p5, p6, p7, p8];
+        // Фільтруємо ворогів (видаляємо тих, хто потрапив під вибух)
         enemies = enemies.filter(enemy => {
-            return !positions.some(p => p.x === enemy.x && p.y === enemy.y);
+            return !positions.some(pos => pos.x === enemy.x && pos.y === enemy.y);
         });
-        i -= 30
-        document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "orange";
-        document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "orange";
-        document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "orange";
-        document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "orange";
-        document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "orange";
-        document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "orange";
-        document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "orange";
-        document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "orange";
-        setTimeout(() => {
 
-                document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "white";
-                document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "white";
-                document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "white";
-                document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "white";
-                document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "white";
-                document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "white";
-                document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "white";
-                document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "white";
+        i -= 30;
 
+        // Цикл №1: Фарбуємо в помаранчевий тільки ті ID, які реально існують
+        for (let pos of positions) {
+            let cell = document.getElementById(toCellId(pos.x, pos.y));
+            if (cell) {
+                cell.style.backgroundColor = "orange";
             }
-            ,500)
+        }
 
+        // Цикл №2: Через 500мс повертаємо білий колір
+        setTimeout(() => {
+            for (let pos of positions) {
+                let cell = document.getElementById(toCellId(pos.x, pos.y));
+                if (cell) {
+                    cell.style.backgroundColor = "white";
+                }
+            }
+        }, 500);
     }
-    move()
-})
+
+    move();
+});
 document.getElementById("rtp").addEventListener("click", function () {
     if (i >= 60){
         let num = Math.floor(Math.random() * 100) + 1;
@@ -262,43 +258,39 @@ document.getElementById("rtp").addEventListener("click", function () {
     }
 })
 function spikeExplosion(center) {
-    let player2 = {...center};
-    let p1 = {x: player2.x - 1, y: player2.y}
-    let p2 = {x: player2.x + 1, y: player2.y}
-    let p3 = {x: player2.x, y: player2.y - 1}
-    let p4 = {x: player2.x, y: player2.y + 1}
-    let p5 = {x: player2.x + 1, y: player2.y + 1}
-    let p6 = {x: player2.x - 1, y: player2.y - 1}
-    let p7 = {x: player2.x + 1, y: player2.y - 1}
-    let p8 = {x: player2.x - 1, y: player2.y + 1}
-    let positions = [p1, p2, p3, p4, p5, p6, p7, p8];
+    let p = {...center};
+
+    // Твої 8 точок навколо центру вибуху
+    let positions = [
+        {x: p.x - 1, y: p.y},     {x: p.x + 1, y: p.y},
+        {x: p.x,     y: p.y - 1}, {x: p.x,     y: p.y + 1},
+        {x: p.x + 1, y: p.y + 1}, {x: p.x - 1, y: p.y - 1},
+        {x: p.x + 1, y: p.y - 1}, {x: p.x - 1, y: p.y + 1}
+    ];
+
+    // Фільтрація ворогів (твоя логіка, працює ідеально)
     enemies = enemies.filter(enemy => {
-        return !positions.some(p => p.x === enemy.x && p.y === enemy.y);
+        return !positions.some(pos => pos.x === enemy.x && pos.y === enemy.y);
     });
-    document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "orange";
-    document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "orange";
-    document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "orange";
-    document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "orange";
-    document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "orange";
-    document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "orange";
-    document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "orange";
-    document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "orange";
-    setTimeout(() => {
 
-            document.getElementById(toCellId(p1.x, p1.y)).style.backgroundColor = "white";
-            document.getElementById(toCellId(p2.x, p2.y)).style.backgroundColor = "white";
-            document.getElementById(toCellId(p3.x, p3.y)).style.backgroundColor = "white";
-            document.getElementById(toCellId(p4.x, p4.y)).style.backgroundColor = "white";
-            document.getElementById(toCellId(p5.x, p5.y)).style.backgroundColor = "white";
-            document.getElementById(toCellId(p6.x, p6.y)).style.backgroundColor = "white";
-            document.getElementById(toCellId(p7.x, p7.y)).style.backgroundColor = "white";
-            document.getElementById(toCellId(p8.x, p8.y)).style.backgroundColor = "white";
-
+    // ОПТИМІЗАЦІЯ №1: Фарбуємо в помаранчевий через один цикл із перевіркою ID
+    for (let pos of positions) {
+        let cell = document.getElementById(toCellId(pos.x, pos.y));
+        if (cell) {
+            cell.style.backgroundColor = "orange";
         }
-        ,500)
+    }
 
+    // ОПТИМІЗАЦІЯ №2: Повертаємо білий колір через 500мс теж через один цикл
+    setTimeout(() => {
+        for (let pos of positions) {
+            let cell = document.getElementById(toCellId(pos.x, pos.y));
+            if (cell) {
+                cell.style.backgroundColor = "white";
+            }
+        }
+    }, 500);
 }
-
 document.getElementById("spike").addEventListener("click", function () {
 
     if (i >= 30 && !sp) {
